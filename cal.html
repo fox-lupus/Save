@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <title>treasure</title>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta name="description" content="" />
+
+  <script>
+    var treasure = 0;
+    var food = 0 ;
+    var clue = 0;
+    var xorn = 0;
+    var academy = 0;
+
+    function caltoken() {
+        intreasure = Number(document.getElementById("treasure").value);
+        inclue = Number(document.getElementById("clue").value);
+        infood = Number(document.getElementById("food").value);
+        xorn = Number(document.getElementById("xorn").value);
+        academy = Number(document.getElementById("academy").value);
+
+        if (academy > 1) {
+          let amount = Math.pow(3, academy) * (intreasure + xorn)/3;
+          amount += Math.pow(3, academy) * (inclue + xorn);
+          amount += Math.pow(3, academy) * (infood + xorn);
+          food += amount;
+          clue += amount;
+          treasure += amount;
+          console.log(treasure);
+          console.log(clue);
+          console.log(food);
+        }
+        else if (academy == 1) {
+          let amount = intreasure + xorn;
+          amount += infood + xorn;
+          amount += clue + xorn;
+          food += amount;
+          clue += amount;
+          treasure += amount;
+          console.log(treasure);
+        }
+        else if (intreasure > 0) {
+          let amount = intreasure + xorn;
+          treasure += amount;
+          food += infood;
+          clue += inclue;
+
+          console.log(treasure);
+        }
+        else {
+          treasure += intreasure;
+          food += infood;
+          clue += inclue;
+        }
+        document.getElementById("count").innerHTML = 
+        "treasure " + treasure.toString() +
+        " food " + food.toString() + " clue " + clue.toString();
+
+    }
+
+    function draw() {
+      var draw = Number(document.getElementById("draws").value);
+      console.log(draw)
+      if (treasure < draw * 2) {
+        return
+      }
+      if (clue < draw) {
+        return
+      }
+      treasure -= draw * 2;
+      clue -= draw
+
+      document.getElementById("count").innerHTML = 
+        "treasure " + treasure.toString() +
+        " food " + food.toString() + " clue " + clue.toString();
+    }
+    function gainlife() {
+      var life = Number(document.getElementById("life").value);
+      console.log(life)
+      if (treasure < life * 2) {
+        return
+      }
+      if (food < life) {
+        return
+      }
+      treasure -= life * 2;
+      food -= life
+      life = life * 3
+
+      document.getElementById("count").innerHTML = 
+        "treasure " + treasure.toString() +
+        " food " + food.toString() + " clue " + clue.toString()
+        +" you gained " + life.toString() + " life";
+    }
+    function remove() {
+      var remove = Number(document.getElementById("removetreasure").value);
+      treasure -= remove
+
+      document.getElementById("count").innerHTML = 
+        "treasure " + treasure.toString() +
+        " food " + food.toString() + " clue " + clue.toString();
+    }
+</script>
+
+</head>
+
+<body>
+
+    <p>input treasure token</p> <input type="text" id="treasure"> <br>
+    <p>input food token</p> <input type="text" id="food"> <br>
+    <p>input clue token</p> <input type="text" id="clue"> <br>
+    <p>xorn</p> <input type="text" id="xorn"> <br>
+    <p>academy manfactures</p> <input type="text" id="academy"> <br>
+
+    <button type="button" onclick="caltoken()">add to total</button> <br>
+
+    <button type="button" onclick="draw()">draw cards</button> <input type="text" id="draws"> <br>
+    <button type="button" onclick="gainlife()"> gain life </button> <input type="text" id="life"> <br>
+    <button type="button" onclick="remove()">remove treasure</button> <input type="text" id="removetreasure" > <br>
+    <p id="count">no token</p>
+
+</body>
+
+</html>
