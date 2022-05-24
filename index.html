@@ -38,7 +38,18 @@
           console.log(food);
         }
         else if (academy == 1) {
-          let amount = intreasure + xorn + infood + xorn + clue + xorn;
+          let real = 0
+          if (intreasure > 0) {
+             real +=1;
+          }
+          if (infood > 0) {
+             real +=1;
+          }
+          if (inclue > 0) {
+             real +=1;
+          }
+
+          let amount = intreasure + inclue + infood + xorn * real;
           food += amount;
           clue += amount;
           treasure += amount;
